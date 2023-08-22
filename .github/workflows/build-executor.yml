@@ -9,7 +9,7 @@ on:
       bal_central_environment:
         required: true
         type: string
-jobs:
+jobs: 
   release:
     runs-on: ubuntu-latest
     env:
