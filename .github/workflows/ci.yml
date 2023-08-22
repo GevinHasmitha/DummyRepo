@@ -8,6 +8,7 @@ on:
 
 env:
   R4_PATTERN: '*/*'
+  FHIRR4_PATTERN: 'fhirr4/*/*'
   UTILS_PATTERN: 'utils/*/*'
   GITHUB_WORKFLOWS_DIR: '.github'
 
@@ -40,6 +41,8 @@ jobs:
           declare -A UNIQUE_PATHS_MAP
           for file in "${CHANGED_FILES_ARRAY[@]}"; do
             if [[ $file == $UTILS_PATTERN ]]; then
+              EXTRACTED_PATH=$(echo "$file" | cut -d '/' -f 1-2)
+            elif [[ $file == $UTILS_PATTERN ]]; then
               EXTRACTED_PATH=$(echo "$file" | cut -d '/' -f 1-2)
             elif [[ $file == $R4_PATTERN ]]; then
               EXTRACTED_PATH=$(echo "$file" | cut -d '/' -f 1)
