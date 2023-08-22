@@ -43,7 +43,7 @@ jobs:
             if [[ $file == $UTILS_PATTERN ]]; then
               EXTRACTED_PATH=$(echo "$file" | cut -d '/' -f 1-2)
             elif [[ $file == $FHIRR4_PATTERN ]]; then
-              EXTRACTED_PATH=$(echo "$file" | cut -d '/' -f 1-2)
+              EXTRACTED_PATH=$(echo "$file" | cut -d '/' -f 1-6)
             elif [[ $file == $R4_PATTERN ]]; then
               EXTRACTED_PATH=$(echo "$file" | cut -d '/' -f 1)
             fi
@@ -80,7 +80,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Ballerina Build
-        if: ${{ matrix.path != 'fhirr4/ballerina' }}
+        if: ${{ matrix.path != 'fhirr4/ballerina/src/main/resources/fhirservice' }}
         uses: ballerina-platform/ballerina-action@2201.7.0
         with:
           args: pack
