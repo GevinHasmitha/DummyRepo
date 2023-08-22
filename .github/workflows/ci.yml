@@ -131,21 +131,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Ballerina Test
-        if: ${{ matrix.path != 'fhirr4' }}
         uses: ballerina-platform/ballerina-action@2201.7.0
         with:
           args: test --code-coverage
         env:
           WORKING_DIR: ./${{ matrix.path }}
-          JAVA_HOME: /usr/lib/jvm/default-jvm
-
-      - name: Ballerina Test
-        if: ${{ matrix.path == 'fhirr4' }}
-        uses: ballerina-platform/ballerina-action@2201.7.0
-        with:
-          args: test --code-coverage
-        env:
-          WORKING_DIR: ./${{ matrix.path }}/ballerina/src/main/resources/fhirservice
           JAVA_HOME: /usr/lib/jvm/default-jvm
 
       - name: Read Ballerina Test Results
