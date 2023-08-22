@@ -80,7 +80,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Ballerina Build
-        if: ${{ matrix.path != 'fhirr4' }}
+        if: ${{ matrix.path != 'fhirr4/ballerina' }}
         uses: ballerina-platform/ballerina-action@2201.7.0
         with:
           args: pack
@@ -89,20 +89,20 @@ jobs:
           JAVA_HOME: /usr/lib/jvm/default-jvm
 
       - name: Setup Maven
-        if: ${{ matrix.path == 'fhirr4' }}
+        if: ${{ matrix.path == 'fhirr4/ballerina' }}
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'zulu'
 
       - uses: ballerina-platform/setup-ballerina@v1.1.0
-        if: ${{ matrix.path == 'fhirr4' }}
+        if: ${{ matrix.path == 'fhirr4/ballerina' }}
         name: Setup latest Ballerina version
         with:
           version: 2201.7.0
 
       - name: Create settings.xml
-        if: ${{ matrix.path == 'fhirr4' }}
+        if: ${{ matrix.path == 'fhirr4/ballerina' }}
         run: echo '<settings>
               <servers>
                 <server>
@@ -114,7 +114,7 @@ jobs:
             </settings>' > ~/.m2/settings.xml
 
       - name: Run maven build
-        if: ${{ matrix.path == 'fhirr4' }}
+        if: ${{ matrix.path == 'fhirr4/ballerina' }}
         run: |
           cd fhirr4
           mvn clean install
