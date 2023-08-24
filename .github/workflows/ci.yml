@@ -93,7 +93,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: 'zulu'
+          distribution: 'temurin'
 
       - uses: ballerina-platform/setup-ballerina@v1.1.0
         if: ${{ matrix.path == 'fhirr4/ballerina/src/main/resources/fhirservice' }}
@@ -134,6 +134,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Ballerina Test
+        if: ${{ matrix.path != 'fhirr4/ballerina/src/main/resources/fhirservice' }}
         uses: ballerina-platform/ballerina-action@2201.7.0
         with:
           args: test --code-coverage
@@ -142,6 +143,7 @@ jobs:
           JAVA_HOME: /usr/lib/jvm/default-jvm
 
       - name: Read Ballerina Test Results
+        if: ${{ matrix.path != 'fhirr4/ballerina/src/main/resources/fhirservice' }}
         id: test_results
         run: |
           if [ -f "./${{ matrix.path }}/target/report/test_results.json" ]; then
